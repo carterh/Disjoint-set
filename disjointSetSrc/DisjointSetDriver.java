@@ -20,9 +20,10 @@ public class DisjointSetDriver {
 		myDS.union('a', 'z');
 		System.out.println(myDS.findSet('a'));
 		System.out.println(myDS.findSet('z'));
-		myDS.union('b', 'a');
+		System.out.println(myDS.union('b', 'a'));
 		System.out.println(myDS.findSet('a'));
 		System.out.println(myDS.findSet('b'));
+		System.out.println(myDS.setSize('b'));
 		
 		System.out.println(myDS.contains('a'));
 		System.out.println(myDS.contains(':'));

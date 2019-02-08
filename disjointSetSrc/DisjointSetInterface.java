@@ -17,11 +17,11 @@ public interface DisjointSetInterface<T> {
 	/* 
 	 * Union the sets containing two specified elements
 	 * in the collection.
-	 * 
-	 * TO-DO: potentially throws a null pointer exception
-	 * if one of the elements is not in the collection.
+	 * Returns the representative element of the new set or
+	 * null if the union operation is not successful (i.e.,
+	 * one or both of the parameters are not in the collection)
 	 */
-	void union(T x, T y);
+	T union(T x, T y);
 	
 	/* Find the representative element of a set given a member 
 	 * element of the set.  Returns a null pointer if the element
@@ -43,4 +43,10 @@ public interface DisjointSetInterface<T> {
 	 * Returns the number of disjoint sets in the collection.
 	 */
 	int setCount();
+	
+	/*
+	 * Returns the size of the set containing element. Returns 0
+	 * if the element is not in the collection.
+	 */
+	int setSize(T element);
 }

@@ -38,8 +38,11 @@ public class HashDisjointSet<T> implements DisjointSetInterface<T> {
 	}
 
 	@Override
-	public void union(T x, T y) {
-		link(findSet(x), findSet(y));
+	public T union(T x, T y) {
+		if(contains(x) && contains(y))
+			return link(findSet(x), findSet(y));
+		else
+			return null;
 	}
 	
 	/*
@@ -47,19 +50,24 @@ public class HashDisjointSet<T> implements DisjointSetInterface<T> {
 	 * based on the rank of each.  Used inside
 	 * of the public union() method above.
 	 */
-	private void link(T x, T y){
+	private T link(T x, T y){
 		SetNode xNode = elements.get(x);
 		SetNode yNode = elements.get(y);
 		
+		setCount--;
 		if(xNode.rank > yNode.rank){
 			yNode.parent = xNode;
+			xNode.setSize += yNode.setSize;
+			return x;
 		}
 		else{
 			xNode.parent = yNode;
+			yNode.setSize += xNode.setSize;
 			if(xNode.rank == yNode.rank)
 				yNode.rank++;
+			return y;
 		}
-		setCount--;
+		
 	}
 
 	@Override
@@ -92,6 +100,14 @@ public class HashDisjointSet<T> implements DisjointSetInterface<T> {
 		return setCount;
 	}
 	
+	@Override
+	public int setSize(T element) {
+		if(contains(element))
+			return elements.get(findSet(element)).setSize;
+		else
+			return 0;
+	}
+	
 	/*
 	 * A class representing the tree node containing
 	 * an element of the collection.  Also stores
@@ -104,11 +120,13 @@ public class HashDisjointSet<T> implements DisjointSetInterface<T> {
 		T element;
 		int rank;
 		SetNode parent;
+		int setSize;
 		
 		public SetNode(T element){
 			this.element = element;
 			rank = 0;
 			parent = this;
+			setSize = 1;
 		}
 	}
 }
