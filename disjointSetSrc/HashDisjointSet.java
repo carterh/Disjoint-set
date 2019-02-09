@@ -39,8 +39,14 @@ public class HashDisjointSet<T> implements DisjointSetInterface<T> {
 
 	@Override
 	public T union(T x, T y) {
-		if(contains(x) && contains(y))
-			return link(findSet(x), findSet(y));
+		if(contains(x) && contains(y)){
+			T xRep = findSet(x);
+			T yRep = findSet(y);
+			if(!xRep.equals(yRep))
+				return link(xRep, yRep);
+			else
+				return xRep;
+		}
 		else
 			return null;
 	}

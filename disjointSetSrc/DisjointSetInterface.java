@@ -20,6 +20,9 @@ public interface DisjointSetInterface<T> {
 	 * Returns the representative element of the new set or
 	 * null if the union operation is not successful (i.e.,
 	 * one or both of the parameters are not in the collection)
+	 * 
+	 * Assumes that the class T overrides the default .equals()
+	 * method.
 	 */
 	T union(T x, T y);
 	

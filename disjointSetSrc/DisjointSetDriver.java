@@ -15,16 +15,30 @@ public class DisjointSetDriver {
 			myDS.add(i);
 		}
 		
+		System.out.println("Testing findset:");
 		System.out.println(myDS.findSet('a'));
 		System.out.println(myDS.findSet('z'));
+		
+		System.out.println("Testing union:");
 		myDS.union('a', 'z');
 		System.out.println(myDS.findSet('a'));
 		System.out.println(myDS.findSet('z'));
+		
+		System.out.println("Testing union return value:");
+		System.out.println(myDS.union('b', 'a'));
+		System.out.println(myDS.findSet('a'));
+		System.out.println(myDS.findSet('b'));
+		
+		System.out.println("Testing setSize:");
+		System.out.println(myDS.setSize('b'));
+		
+		System.out.println("Testing setSize after union on elements in the same set:");
 		System.out.println(myDS.union('b', 'a'));
 		System.out.println(myDS.findSet('a'));
 		System.out.println(myDS.findSet('b'));
 		System.out.println(myDS.setSize('b'));
 		
+		System.out.println("Testing contains:");
 		System.out.println(myDS.contains('a'));
 		System.out.println(myDS.contains(':'));
 		
